@@ -1,5 +1,17 @@
+.main {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .chart_container {
   max-height: 500px;
   width: 100%;
   margin: 32px;
+}
+
+footer {
+  flex-basis: 125px;
+  border-top: 1px solid black;
+  margin-top: 25px;
 }

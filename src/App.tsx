@@ -39,11 +39,11 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <>
+    <div className={styles.main}>
       <Header />
       <RouterProvider router={router} />
       <footer>I am footer</footer>
-    </>
+    </div>
   );
 }
 

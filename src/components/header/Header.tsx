@@ -5,7 +5,7 @@ export function Header() {
   return (
     <>
       <h1 className={styles.header_title}>
-        <a href={"test"}>IDK HELLO</a>
+        <p>Header Here</p>
       </h1>
     </>
   );
