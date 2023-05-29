@@ -1,15 +1,17 @@
 import { Pie } from "react-chartjs-2";
 import {
-  Chart as ChartJS,
   ArcElement,
-  Tooltip,
-  Legend,
+  Chart as ChartJS,
   ChartData,
+  Legend,
+  Tooltip,
 } from "chart.js";
+import { useEffect, useState } from "react";
+import { api, ILootInfo } from "../../api/loot/loot.api";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const data: ChartData<"pie"> = {
+const mockData: ChartData<"pie"> = {
   datasets: [
     {
       label: "# of Votes",
@@ -36,5 +38,20 @@ const data: ChartData<"pie"> = {
 };
 
 export default function ChartComponent() {
-  return <Pie data={data} />;
+  const [data, setData] = useState<ILootInfo[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    setLoading(true);
+    const fetchLootData: Promise<ILootInfo[]> = api.getAllLoot<ILootInfo[]>();
+    fetchLootData
+      .then((res) => {
+        setData(res);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
+  return <Pie data={mockData} />;
 }
