@@ -5,6 +5,5 @@ export const ProtectedRoute = ({ component }: { component: React.FC }) => {
   const Component = withAuthenticationRequired(component, {
     onRedirecting: () => <div className="page-layout">Authenticating ...</div>,
   });
-
   return <Component />;
 };

@@ -1,50 +1,17 @@
-import React, { useEffect, useState } from "react";
-import "./App.scss";
-import { Auth0Provider } from "@auth0/auth0-react";
+import React from "react";
+import "./App.module.scss";
 import {
   createBrowserRouter,
   Navigate,
-  Outlet,
   RouterProvider,
-  useLocation,
-  useNavigate,
 } from "react-router-dom";
 import Upload from "./components/upload/Upload";
-import { ProtectedRoute } from "./components/protected-path/protected-path";
+import { ProtectedRoute } from "./components/auth/protected-path/protected-path";
+import { Auth0ProviderLayout } from "./components/auth/auth0-provider/Auth0ProviderLayout";
+import ChartComponent from "./components/chart/Chart";
 
-const Auth0ProviderLayout = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [previousLocation, setPreviousLocation] = useState(null);
-
-  useEffect(() => {
-    if (location.state?.from) {
-      setPreviousLocation(location.state.from);
-    }
-  }, [location]);
-
-  const onRedirectCallback = () => {
-    if (previousLocation) {
-      navigate(previousLocation);
-      setPreviousLocation(null);
-    } else {
-      navigate("/upload");
-    }
-  };
-
-  return (
-    <Auth0Provider
-      domain="dev-qh2nqjcadoxyg0eq.us.auth0.com"
-      clientId="yJAXEXHdu01vaGBuuJPZ9WPY0UjYLq83"
-      onRedirectCallback={onRedirectCallback}
-      authorizationParams={{
-        redirect_uri: window.location.origin,
-      }}
-    >
-      <Outlet />
-    </Auth0Provider>
-  );
-};
+import styles from "./App.module.scss";
+import { Header } from "./components/header/Header";
 
 const router = createBrowserRouter([
   {
@@ -52,7 +19,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <div>Home</div>,
+        element: (
+          <div className={styles.chart_container}>
+            <ChartComponent />
+          </div>
+        ),
       },
       {
         path: "/upload",
@@ -67,7 +38,13 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <Header />
+      <RouterProvider router={router} />
+      <footer>I am footer</footer>
+    </>
+  );
 }
 
 export default App;
