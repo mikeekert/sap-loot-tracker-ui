@@ -15,7 +15,7 @@ export default function ChartPage() {
 
   return (
     <div className={styles.chart_page}>
-      <ChartComponent />
+      <ChartComponent data={data} />
     </div>
   );
 }

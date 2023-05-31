@@ -10,8 +10,8 @@ import {
   Title,
   Tooltip,
 } from "chart.js";
-import { useState } from "react";
 import { ILootInfo } from "../../models/ILootInfo";
+import { useEffect, useState } from "react";
 
 Chart.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -54,8 +54,12 @@ export const options: ChartOptions = {
   },
 };
 
-export default function ChartComponent() {
-  const [data, setData] = useState<ILootInfo[]>([]);
+export default function ChartComponent({ data }: { data: ILootInfo[] }) {
+  const [lootData, setLootData] = useState<ILootInfo[]>([]);
+  useEffect(() => {
+    setLootData(data);
+    console.log(lootData);
+  }, [data, lootData]);
 
   return <Bar data={mockData} options={options} />;
 }

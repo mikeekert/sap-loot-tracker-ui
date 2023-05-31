@@ -19,7 +19,7 @@ export function Header() {
     loginWithRedirect().then((r) => r);
   };
 
-  const showAuth0Prompt = () => {
+  const displayContextualAuthenticationButton = () => {
     if (!isAuthenticated) {
       return (
         <Button variant={"contained"} onClick={handleLogin}>
@@ -47,7 +47,7 @@ export function Header() {
           </Link>
         )}
         <div className={"flex-1 flex justify-end flex-row"}>
-          {showAuth0Prompt()}
+          {displayContextualAuthenticationButton()}
         </div>
       </div>
     </>
