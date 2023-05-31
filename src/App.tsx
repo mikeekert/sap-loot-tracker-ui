@@ -7,23 +7,26 @@ import {
 } from "react-router-dom";
 import Upload from "./components/upload/Upload";
 import { ProtectedRoute } from "./components/auth/protected-path/protected-path";
-import { Auth0ProviderLayout } from "./components/auth/auth0-provider/Auth0ProviderLayout";
-import ChartComponent from "./components/chart/Chart";
-
 import styles from "./App.module.scss";
-import { Header } from "./components/header/Header";
+import ChartPage from "./pages/Chart/Chart.page";
+import { api } from "./api/loot/loot.api";
+import Layout from "./pages/Layout/Layout";
+import { Auth0Provider } from "@auth0/auth0-react";
 
 const router = createBrowserRouter([
   {
-    element: <Auth0ProviderLayout />,
+    element: <Layout />,
     children: [
       {
         path: "/",
         element: (
           <div className={styles.chart_container}>
-            <ChartComponent />
+            <ChartPage />
           </div>
         ),
+        loader: async () => {
+          return api.getMockData();
+        },
       },
       {
         path: "/upload",
@@ -39,11 +42,19 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <div className={styles.main}>
-      <Header />
-      <RouterProvider router={router} />
-      <footer>I am footer</footer>
-    </div>
+    <Auth0Provider
+      domain="dev-qh2nqjcadoxyg0eq.us.auth0.com"
+      clientId="yJAXEXHdu01vaGBuuJPZ9WPY0UjYLq83"
+      authorizationParams={{
+        redirect_uri: window.location.origin,
+      }}
+    >
+      {
+        <div className={styles.main}>
+          <RouterProvider router={router} />
+        </div>
+      }
+    </Auth0Provider>
   );
 }
 

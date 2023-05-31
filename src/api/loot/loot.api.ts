@@ -11,6 +11,13 @@ async function handleResponse<T>(response: Response): Promise<T> {
 }
 
 export const api = {
+  async getMockData<T>(): Promise<T> {
+    const url = `/json/mock.data.json`;
+
+    const response = await fetch(url);
+    return handleResponse<T>(response);
+  },
+
   async getAllLoot<T>(): Promise<T> {
     const url = `${BASE_URL}/`;
 

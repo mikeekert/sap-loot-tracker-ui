@@ -5,13 +5,12 @@
 }
 
 .chart_container {
-  max-height: 500px;
   width: 100%;
-  margin: 32px;
+  flex: 1;
 }
 
 footer {
-  flex-basis: 125px;
+  flex: 0 0 125px;
   border-top: 1px solid black;
   margin-top: 25px;
 }

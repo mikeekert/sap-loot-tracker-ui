@@ -1,37 +1,23 @@
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import React, { useEffect, useState } from "react";
-import { Auth0Provider } from "@auth0/auth0-react";
+import { Outlet } from "react-router-dom";
+import React from "react";
+import { Header } from "../../header/Header";
+import { useAuth0 } from "@auth0/auth0-react";
+import Loading from "../../loading/Loading";
+import Footer from "../../footer/Footer";
 
 export const Auth0ProviderLayout = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [previousLocation, setPreviousLocation] = useState(null);
-
-  useEffect(() => {
-    if (location.state?.from) {
-      setPreviousLocation(location.state.from);
-    }
-  }, [location]);
-
-  const onRedirectCallback = () => {
-    if (previousLocation) {
-      navigate(previousLocation);
-      setPreviousLocation(null);
-    } else {
-      navigate("/upload");
-    }
-  };
-
+  const { isLoading } = useAuth0();
   return (
-    <Auth0Provider
-      domain="dev-qh2nqjcadoxyg0eq.us.auth0.com"
-      clientId="yJAXEXHdu01vaGBuuJPZ9WPY0UjYLq83"
-      onRedirectCallback={onRedirectCallback}
-      authorizationParams={{
-        redirect_uri: window.location.origin,
-      }}
-    >
-      <Outlet />
-    </Auth0Provider>
+    <>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <Header />
+          <Outlet />
+          <Footer />
+        </>
+      )}
+    </>
   );
 };
