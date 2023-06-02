@@ -27,11 +27,17 @@ export const api = {
 
   async postLoot<T>(data: ILootInfo[]): Promise<T> {
     const url = `${BASE_URL}/sendNewLoot`;
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      throw new Error("No token saved!");
+    }
 
     const response = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(data),
     });

@@ -1,7 +1,9 @@
 import styles from "./Upload.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getLootInfoKeys, ILootInfo } from "../../models/ILootInfo";
 import { Button } from "@mui/material";
+import { useAuth0 } from "@auth0/auth0-react";
+import { api } from "../../api/loot/loot.api";
 
 enum Status {
   IDLE = "idle",
@@ -13,6 +15,29 @@ export default function Upload() {
   const [status, setStatus] = useState<Status>(Status.IDLE);
   const [dates, setDates] = useState<string[]>([]);
   const [characters, setCharacters] = useState<string[]>([]);
+  const [jsonData, setJsonData] = useState<ILootInfo[]>([]);
+  const { getAccessTokenWithPopup, user } = useAuth0();
+
+  useEffect(() => {
+    const getUserMetadata = async () => {
+      const domain = "dev-qh2nqjcadoxyg0eq.us.auth0.com";
+      try {
+        const token = await getAccessTokenWithPopup({
+          authorizationParams: {
+            audience: `https://${domain}/api/v2/`,
+            scope: "read:client_credentials",
+          },
+        });
+        // set localstorage token
+        if (typeof token === "string") {
+          window.localStorage.setItem("token", token);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getUserMetadata().then((r) => r);
+  }, [getAccessTokenWithPopup, user?.sub]);
 
   function isValidJSON(data: any) {
     try {
@@ -35,6 +60,7 @@ export default function Upload() {
     const json = JSON.parse(str);
     if (checkKeyValidity(json)) {
       setStatus(Status.VALID);
+      setJsonData(json);
       return;
     } else {
       setStatus(Status.INVALID);
@@ -115,6 +141,10 @@ export default function Upload() {
     );
   }
 
+  function postData() {
+    api.postLoot(jsonData).then((r) => r);
+  }
+
   return (
     <div className={styles.upload}>
       <textarea
@@ -132,7 +162,7 @@ export default function Upload() {
         ) : null}
       </div>
       <div>
-        <Button className={"my-5"} variant="contained">
+        <Button onClick={postData} className={"my-5"} variant="contained">
           Upload
         </Button>
       </div>

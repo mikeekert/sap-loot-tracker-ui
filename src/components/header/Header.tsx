@@ -18,7 +18,6 @@ export function Header() {
   const handleLogin = () => {
     loginWithRedirect().then((r) => r);
   };
-
   const displayContextualAuthenticationButton = () => {
     if (!isAuthenticated) {
       return (
