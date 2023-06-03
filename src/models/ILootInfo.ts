@@ -20,6 +20,7 @@ export interface ILootInfo {
   note: string;
   owner: string;
   itemName: string;
+  itemMedia?: string;
 }
 
 export function getLootInfoKeys() {

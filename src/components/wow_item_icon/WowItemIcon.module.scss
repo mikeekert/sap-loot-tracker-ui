@@ -1,0 +1,44 @@
+.loot_panel {
+  color: white;
+  width: fit-content;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 14px;
+
+  .icon {
+    aspect-ratio: 1/1;
+    height: 56px;
+    border: 1px solid grey;
+    border-radius: 4px;
+    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  }
+}
+
+.loot_card {
+  width: 100%;
+  max-width: 325px;
+  background-color: #050a1e !important;
+  color: rgb(255, 255, 255);
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 4px;
+  border: 1px solid rgba(241, 241, 241, 0.35) !important;
+}
+
+.loot_container {
+  padding: 8px !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .h {
+    height: 56px;
+
+    .difficulty {
+      color: #1eff00;
+      font-size: 12px;
+    }
+  }
+
+  .label {
+    line-height: 32px;
+  }
+}

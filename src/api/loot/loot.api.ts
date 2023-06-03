@@ -19,7 +19,7 @@ export const api = {
   },
 
   async getAllLoot<T>(): Promise<T> {
-    const url = `${BASE_URL}/`;
+    const url = `${BASE_URL}/getAllLoot`;
 
     const response = await fetch(url);
     return handleResponse<T>(response);
@@ -27,9 +27,24 @@ export const api = {
 
   async postLoot<T>(data: ILootInfo[]): Promise<T> {
     const url = `${BASE_URL}/sendNewLoot`;
-    const token = localStorage.getItem("token");
+    const jwtToken = localStorage.getItem("token");
+    const bnetAccessToken = localStorage.getItem("bnet_token");
 
-    if (!token) {
+    // get Item Media from Wow API
+    for (let i = 0; i < data.length; i++) {
+      const itemMediaUrl = `https://us.api.blizzard.com/data/wow/media/item/${data[i].itemID}?namespace=static-us&locale=en_US`;
+      const itemMediaResponse = await fetch(itemMediaUrl, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${bnetAccessToken}`,
+        },
+      });
+      const itemMedia = await itemMediaResponse.json();
+      data[i].itemMedia = itemMedia.assets[0].value;
+    }
+
+    if (!jwtToken) {
       throw new Error("No token saved!");
     }
 
@@ -37,7 +52,7 @@ export const api = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${jwtToken}`,
       },
       body: JSON.stringify(data),
     });

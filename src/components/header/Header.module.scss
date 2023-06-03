@@ -1,6 +1,13 @@
 .header_title {
   font-size: 1.5rem;
   border-bottom: 1px solid black;
-  margin-bottom: 25px;
-  flex: 0 0 125px;
+  border-top-color: white;
+  flex: 0 0 55px;
+  background: #262321;
+  align-items: center;
+  padding: 0 16px;
+
+  Button {
+    height: 36px;
+  }
 }

@@ -14,6 +14,7 @@ import { ILootInfo } from "../../models/ILootInfo";
 import { useEffect, useState } from "react";
 
 Chart.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+Chart.defaults.color = "#fff";
 
 const mockData: ChartData<"bar"> = {
   labels: [
@@ -50,6 +51,7 @@ export const options: ChartOptions = {
     title: {
       display: true,
       text: "SAP Loot Chart",
+      color: "white",
     },
   },
 };
@@ -58,7 +60,6 @@ export default function ChartComponent({ data }: { data: ILootInfo[] }) {
   const [lootData, setLootData] = useState<ILootInfo[]>([]);
   useEffect(() => {
     setLootData(data);
-    console.log(lootData);
   }, [data, lootData]);
 
   return <Bar data={mockData} options={options} />;

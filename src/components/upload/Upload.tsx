@@ -145,6 +145,10 @@ export default function Upload() {
     api.postLoot(jsonData).then((r) => r);
   }
 
+  function statusIsValidCheck() {
+    return status === Status.VALID;
+  }
+
   return (
     <div className={styles.upload}>
       <textarea
@@ -154,7 +158,7 @@ export default function Upload() {
       />
       <div className={"flex-1"}>
         <h1>STATUS: {status}</h1>
-        {status === Status.VALID ? (
+        {statusIsValidCheck() ? (
           <div className={styles.details}>
             <h1>Raid Date(s): {formatDates(dates)}</h1>
             <h1>List Of Players: {formatPlayers(characters)}</h1>
@@ -162,7 +166,12 @@ export default function Upload() {
         ) : null}
       </div>
       <div>
-        <Button onClick={postData} className={"my-5"} variant="contained">
+        <Button
+          onClick={postData}
+          disabled={!statusIsValidCheck()}
+          className={"my-5"}
+          variant="contained"
+        >
           Upload
         </Button>
       </div>

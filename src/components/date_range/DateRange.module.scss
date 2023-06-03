@@ -1,0 +1,16 @@
+.container {
+  width: 100%;
+  align-items: flex-end;
+
+  .range_box {
+    width: fit-content;
+    border-radius: 4px;
+    padding: 8px;
+    border: 2px solid black;
+    font-weight: bold;
+    display: flex;
+    background: black;
+    box-shadow: 3px 3px 1px 0 rgba(0, 0, 0, 0.38);
+    cursor: pointer;
+  }
+}
