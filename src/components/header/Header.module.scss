@@ -1,12 +1,15 @@
-.header_title {
+.header {
   font-size: 1.5rem;
   border-bottom: 1px solid black;
   border-top-color: white;
   flex: 0 0 55px;
   background: #262321;
   align-items: center;
-  padding: 0 16px;
+  display: flex;
+}
 
+.header_title {
+  margin: 0 auto;
   Button {
     height: 36px;
   }

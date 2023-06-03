@@ -12,3 +12,18 @@ body,
 #root {
   height: 100%;
 }
+
+.container {
+  max-width: 1048px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+// add wildcard rule for MuiFormLabel-root.Mui-focused* {
+*[class$="Mui-focused"] {
+  color: #fff;
+}
+
+.Mui-focused {
+  color: #fff !important;
+}

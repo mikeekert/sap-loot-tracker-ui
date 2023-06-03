@@ -1,7 +1,6 @@
 import styles from "./DateRange.module.scss";
-import DateRangeIcon from "@mui/icons-material/DateRange";
 import { useEffect, useState } from "react";
-
+import EditCalendarIcon from "@mui/icons-material/EditCalendar";
 export default function DateRange({
   dateRange,
 }: {
@@ -16,11 +15,11 @@ export default function DateRange({
   }, [dateRange, dates]);
 
   return (
-    <div className={`flex justify-end ${styles.container}`}>
+    <div className={`flex items-center justify-end ${styles.container}`}>
+      <div className={`mr-3`}>Date Range</div>
       <div className={styles.range_box}>
         <div className={`mr-3`}>
-          {" "}
-          <DateRangeIcon />{" "}
+          <EditCalendarIcon />
         </div>
         <div>
           {" "}

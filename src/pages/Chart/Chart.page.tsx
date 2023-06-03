@@ -4,6 +4,7 @@ import ChartComponent from "../../components/chart/Chart";
 import styles from "./Chart.page.module.scss";
 import { useLoaderData } from "react-router-dom";
 import DateRange from "../../components/date_range/DateRange";
+import Filter from "../../components/Filter/Filter";
 
 export default function ChartPage() {
   const [data, setData] = useState<ILootInfo[]>([]);
@@ -31,6 +32,11 @@ export default function ChartPage() {
         </div>
         <div className={styles.chart}>
           <ChartComponent data={data} />
+        </div>
+      </div>
+      <div className={`${styles.chart_container} my-5`}>
+        <div className={``}>
+          <Filter />
         </div>
       </div>
     </div>

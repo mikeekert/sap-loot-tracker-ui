@@ -36,17 +36,21 @@ export function Header() {
 
   return (
     <>
-      <div className={`${styles.header_title} flex`}>
-        <Link className={"mr-5"} to={"/"} relative={"path"}>
-          Home
-        </Link>
-        {isAuthenticated && (
-          <Link className={"mr-5"} to={"/upload"}>
-            Admin
-          </Link>
-        )}
-        <div className={"flex-1 flex justify-end flex-row"}>
-          {displayContextualAuthenticationButton()}
+      <div className={`w-full ${styles.header}`}>
+        <div className="container">
+          <div className={`${styles.header_title} flex`}>
+            <Link className={"mr-5"} to={"/"} relative={"path"}>
+              Home
+            </Link>
+            {isAuthenticated && (
+              <Link className={"mr-5"} to={"/upload"}>
+                Admin
+              </Link>
+            )}
+            <div className={"flex-1 flex justify-end flex-row"}>
+              {displayContextualAuthenticationButton()}
+            </div>
+          </div>
         </div>
       </div>
     </>

@@ -1,15 +1,15 @@
 .container {
   width: 100%;
-  align-items: flex-end;
+  font-weight: 500;
 
   .range_box {
     width: fit-content;
     border-radius: 4px;
     padding: 8px;
-    font-weight: bold;
     display: flex;
     background: #1976d2;
     cursor: pointer;
+    user-select: none;
 
     &:hover {
       background: #1565c0;
