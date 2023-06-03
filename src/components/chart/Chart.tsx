@@ -27,16 +27,24 @@ const mockData: ChartData<"bar"> = {
   ],
   datasets: [
     {
-      label: "# of Drops",
+      label: "# of Drops for Player",
       data: [12, 19, 3, 5, 2, 3],
-      borderColor: "rgb(255, 99, 132)",
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
+      borderColor: "rgb(35,35,35)",
+      backgroundColor: "rgba(0,0,0,0.5)",
       borderWidth: 1,
     },
   ],
 };
 
-export const options: ChartOptions = {
+export const options: ChartOptions<"bar"> = {
+  scales: {
+    x: {
+      title: {
+        display: true,
+        text: "Player Drop count",
+      },
+    },
+  },
   indexAxis: "y" as const,
   elements: {
     bar: {

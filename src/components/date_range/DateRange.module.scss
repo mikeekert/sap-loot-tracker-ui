@@ -6,11 +6,13 @@
     width: fit-content;
     border-radius: 4px;
     padding: 8px;
-    border: 2px solid black;
     font-weight: bold;
     display: flex;
-    background: black;
-    box-shadow: 3px 3px 1px 0 rgba(0, 0, 0, 0.38);
+    background: #1976d2;
     cursor: pointer;
+
+    &:hover {
+      background: #1565c0;
+    }
   }
 }

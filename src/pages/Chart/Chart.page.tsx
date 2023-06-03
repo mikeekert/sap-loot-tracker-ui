@@ -3,7 +3,6 @@ import { ILootInfo } from "../../models/ILootInfo";
 import ChartComponent from "../../components/chart/Chart";
 import styles from "./Chart.page.module.scss";
 import { useLoaderData } from "react-router-dom";
-import WowItemIcon from "../../components/wow_item_icon/WowItemIcon";
 import DateRange from "../../components/date_range/DateRange";
 
 export default function ChartPage() {
@@ -30,7 +29,9 @@ export default function ChartPage() {
         <div className={styles.chart_header}>
           <DateRange dateRange={getDateRangeFromData(chartData)} />
         </div>
-        <ChartComponent data={data} />
+        <div className={styles.chart}>
+          <ChartComponent data={data} />
+        </div>
       </div>
     </div>
   );

@@ -8,12 +8,16 @@
   flex-direction: column;
   justify-content: center;
   max-width: 1048px;
-  margin: 0 auto;
-  padding: 0 32px;
   border: 2px solid black;
 
   .chart_header {
     width: 100%;
-    margin: 8px;
+    padding: 8px;
+    background: #1a1716;
+    border-bottom: 2px solid black;
+  }
+
+  .chart {
+    padding: 32px;
   }
 }
